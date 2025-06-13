@@ -68,8 +68,7 @@ body i:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--food-color);
-    transform: scale(1.4);
+    color: var(--food-color)
 }
 
 .play-board .head {
