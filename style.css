@@ -37,7 +37,7 @@ body i:hover {
 
 .wrapper {
     width: 65vmin;
-    height: 70vmin;
+    /* height: 70vmin; */
     display: flex;
     overflow: hidden;
     flex-direction: column;
