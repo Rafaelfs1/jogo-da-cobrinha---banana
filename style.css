@@ -30,16 +30,17 @@ body i {
     color: #1ac871;
     font-size: 20px;
 }
+
 body i:hover {
     color: #000000;
 }
 
 
 .wrapper {
+    position: relative;
     width: 65vmin;
-    /* height: 70vmin; */
+    height: 75vmin;
     display: flex;
-    overflow: hidden;
     flex-direction: column;
     justify-content: center;
     background: var(--wrapper-bg-color);
@@ -48,11 +49,47 @@ body i:hover {
 }
 
 .game-details {
+    display: flex;
+    flex-direction: column;
     font-size: 1.2rem;
     font-weight: 500;
     padding: 20px 27px;
     display: flex;
     justify-content: space-between;
+}
+
+.extra {
+    display: flex;
+
+    justify-content: space-between;
+}
+
+.display-score {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.alert {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 15px 25px;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  border-radius: 50px;
+  font-family: sans-serif;
+  font-weight: bold;
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.alert.show {
+  opacity: 1;
+  visibility: visible;
 }
 
 .play-board {
@@ -109,4 +146,42 @@ body i:hover {
         padding: 15px 0;
         font-size: 1rem;
     }
+}
+
+/* Estilos para a cobra com imagens e rotação completa */
+.play-board .snake-head,
+.play-board .snake-body-straight,
+.play-board .snake-body-turn,
+.play-board .snake-tail {
+    /* Estilos comuns a todos os segmentos */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    /* Adicionamos uma cor de fundo para o caso da imagem não carregar */
+    /* background-color: #4CAF50;  */
+}
+
+.play-board .snake-head {
+    background-image: url('asset/cabeca.png');
+    z-index: 2; /* Garante que a cabeça fique ligeiramente acima do corpo */
+}
+.play-board .snake-head:active {
+    background-image: url('asset/cabeca-FAIL.png');
+    z-index: 2; /* Garante que a cabeça fique ligeiramente acima do corpo */
+}
+
+.play-board .snake-head.shielded {
+    filter: drop-shadow(0 0 5px #3498db); /* Efeito de brilho melhor para imagens */
+}
+
+.play-board .snake-body-straight {
+    background-image: url('asset/corpo_reto.png');
+}
+
+.play-board .snake-body-turn {
+    background-image: url('asset/corpo_curva.png');
+}
+
+.play-board .snake-tail {
+    background-image: url('asset/cauda.png');
 }
