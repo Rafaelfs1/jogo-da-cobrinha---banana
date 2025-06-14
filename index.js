@@ -39,12 +39,12 @@ let shieldCount = 0;
 let isFoodHoming = false;
 
 const fruits = {
-    // maça: "🍎",
-    // banana: "🍌",
+    maça: "🍎",
+    banana: "🍌",
     uva: "🍇",
-    // laranja: "🍊",
-    // morango: "🍓",
-    // kiwi: "🥝",
+    laranja: "🍊",
+    morango: "🍓",
+    kiwi: "🥝",
     manga: "🥭"
 };
 
@@ -79,10 +79,27 @@ const spawnNewFruit = () => {
     }
 };
 
+// som de game over
+const playTrilhaSound = () => {
+    const gameOverSound = new Audio('asset/audio/jazz.mp3');
+    gameOverSound.play();
+};
+const playCorrectSound = () => {
+    const gameOverSound = new Audio('asset/audio/correct.mp3');
+    gameOverSound.play();
+};
+const playWrongSound = () => {
+    const gameOverSound = new Audio('asset/audio/wrong.mp3');
+    gameOverSound.play();
+};
+
+
 const handleGameOver = () => {
+    playWrongSound();
     clearInterval(setIntervalId);
     clearInterval(foodIntervalId);
     alert("Game Over! Pressione OK para reiniciar...");
+    
     location.reload();
 };
 
@@ -102,6 +119,7 @@ const updateStatusUI = () => {
     else if (speed > baseSpeed) statusSpeedElement.innerText = '🐢';
     else statusSpeedElement.innerText = '⚡';
 };
+
 
 // --- LÓGICA DOS EFEITOS ---
 
@@ -167,11 +185,12 @@ const showAlert = (message) => {
 const applyFruitEffect = (fruitKey) => {
     switch (fruitKey) {
         case 'maça':
-            // Nenhuma mensagem para a fruta padrão
-            break;
+            playCorrectSound();// Nenhuma mensagem para a fruta padrão
+            
         case 'banana':
             if (shieldCount < 3) {
                 shieldCount++;
+                
                 showAlert("Escudo Ativado! 🛡️");
             } else {
                 showAlert("Máximo de escudos atingido!");
@@ -204,10 +223,13 @@ const applyFruitEffect = (fruitKey) => {
             break;
     }
     updateStatusUI();
+    playCorrectSound();
 };
 
 const initGame = () => {
     if (gameOver) return handleGameOver();
+
+    
 
     if (nextDirection) {
         const isMovingHorizontally = velocityX !== 0;
@@ -408,6 +430,7 @@ const initGame = () => {
 };
 // Inicia o Jogo
 spawnNewFruit();
+
 setIntervalId = setInterval(initGame, speed);
 document.addEventListener("keyup", changeDirection);
 controls.forEach(button => button.addEventListener("click", () => changeDirection({ key: button.dataset.key })));
