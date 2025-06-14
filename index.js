@@ -95,7 +95,7 @@ const playWrongSound = () => {
 
 
 const handleGameOver = () => {
-    playWrongSound();
+
     clearInterval(setIntervalId);
     clearInterval(foodIntervalId);
     alert("Game Over! Pressione OK para reiniciar...");
